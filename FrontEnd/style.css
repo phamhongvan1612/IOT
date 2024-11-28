@@ -1,0 +1,357 @@
+ul {
+  list-style: none;
+}
+body {
+  background-image: url(./honeycombs-abstract-minimalism-simple-background-wallpaper-preview.jpg);
+  background-size: cover;
+}
+.body a {
+  text-decoration: none;
+  font-size: larger;
+}
+#home {
+  width: 150px;
+  height: 30px;
+  background-color: rgb(113, 112, 32);
+  border-radius: 20px;
+  text-align: center;
+  margin-right: 8px;
+  box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.8);
+}
+#history {
+  width: 150px;
+  height: 30px;
+  background-color: darkslategrey;
+  border-radius: 20px;
+  text-align: center;
+  margin-right: 8px;
+  box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.8);
+}
+#other {
+  width: 150px;
+  height: 30px;
+  background-color: rgb(104, 88, 104);
+  border-radius: 20px;
+  text-align: center;
+  margin-right: 8px;
+  box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.8);
+}
+#otherhistory {
+  width: 150px;
+  height: 30px;
+  background-color: rgb(243, 191, 114);
+  border-radius: 20px;
+  text-align: center;
+  margin-right: 8px;
+  box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.8);
+}
+#profile {
+  width: 150px;
+  height: 30px;
+  background-color: rgb(84, 117, 144);
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.8);
+}
+.header h1 {
+  margin-left: 120px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  width: 200px;
+  height: 50px;
+  background: linear-gradient(to right, #3b90c5, #33cb96);
+  border-radius: 50px;
+  text-align: center;
+  box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.8);
+}
+.header .body {
+  margin-top: 10px;
+  display: flex;
+  border: 1px groove #969191;
+  border-radius: 20px;
+  background: linear-gradient(to right, #c1d3de, #9a96b8);
+}
+.hi {
+  margin-left: auto;
+}
+.hi ul {
+  display: flex;
+  margin-right: 200px;
+}
+.container {
+  width: 1500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.hi a {
+  padding: 0px 31px;
+  color: black;
+}
+.hi a:hover {
+  color: blue;
+}
+.header .hi {
+  margin-top: 15px;
+}
+.thanhphan .chung {
+  width: 250px;
+  height: 150px;
+  border: 1px solid burlywood;
+  margin-top: 30px;
+  margin-left: 35px;
+  margin-bottom: 60px;
+  margin-right: 20px;
+  border-radius: 30px;
+  text-align: center;
+  font-size: 25px;
+  background: rgb(201, 230, 221);
+  box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.8);
+}
+.thanhphan .cambien {
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 250px;
+  height: 150px;
+  border: 1px solid rgb(137, 214, 221);
+  border-radius: 20px;
+  background: rgb(218, 235, 242);
+  box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.8);
+  text-align: center;
+  font-size: 25px;
+}
+.chung i {
+  margin-top: 20px;
+}
+.body2 {
+  margin-top: 20px;
+  width: 1450px;
+  height: 630px;
+  border: 1px solid brown;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 20px;
+  background: linear-gradient(to right, #6e6e9a, #476465);
+}
+.bodyother {
+  margin-top: 20px;
+  width: 1450px;
+  height: 630px;
+  border: 1px solid brown;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 20px;
+  background: linear-gradient(to right, #6e6e9a, #476465);
+  display: flex;
+}
+#myChart {
+  margin-top: 100px;
+}
+#otherChart {
+  margin-top: 100px;
+}
+.tenbang {
+  color: #476465;
+  font-size: 30px;
+  text-align: center;
+  margin-top: 10px;
+}
+.body2 .khoi {
+  display: flex;
+}
+.khoi .table1 {
+  margin-top: 30px;
+  margin-left: 20px;
+  width: 800px;
+  height: 570px;
+  border: 1px groove rgb(106, 90, 121);
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.8);
+}
+.khoi .tablecb {
+  margin-top: 30px;
+  margin-left: 100px;
+  width: 900px;
+  height: 570px;
+  border: 1px groove rgb(106, 90, 121);
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.8);
+}
+.khoi .nut {
+  margin: auto 20px;
+  width: 300px;
+  height: 450px;
+  border-radius: 20px;
+}
+.nut {
+  display: flex;
+  justify-content: space-evenly; /* Khoảng cách đều nhau giữa các nút */
+  align-items: center; /* Căn giữa theo trục dọc */
+  flex-wrap: wrap; /* Đảm bảo không bị tràn khi màn hình nhỏ */
+  height: 100vh; /* Chiều cao toàn màn hình */
+}
+
+.bodyother {
+  display: flex;
+  justify-content: center; /* Đặt toàn bộ nội dung vào giữa theo chiều ngang */
+  align-items: center; /* Đặt toàn bộ nội dung vào giữa theo chiều dọc */
+  height: 100vh; /* Chiều cao tối đa */
+}
+
+.other1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px; /* Khoảng cách giữa các nút */
+}
+
+.taonut {
+  margin-top: 10px; /* Khoảng cách giữa icon và nút */
+}
+.nut .chung1 {
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 250px;
+  height: 150px;
+  border: 1px solid rgb(137, 214, 221);
+  border-radius: 20px;
+  background: rgb(215, 230, 242);
+  box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.8);
+}
+.nut .other1 {
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+  height: 300px;
+  border: 1px solid rgb(137, 214, 221);
+  border-radius: 20px;
+  background: rgb(215, 230, 242);
+  box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.8);
+}
+.nut .chu {
+  font-size: 25px;
+  margin-top: 8px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.nut .other2 {
+  font-size: 50px;
+  margin-top: 8px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.nut .nut3 {
+  margin-right: 50px;
+}
+.chung1 .taonut {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(215, 230, 242);
+}
+.chung1 .button {
+  width: 110px;
+  height: 50px;
+  background-color: #c4cbe4;
+  border-radius: 100px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+}
+.button::before {
+  position: absolute;
+  content: "";
+  background-color: #97bae3;
+  width: 50px;
+  height: 50px;
+  border: 1px solid black;
+  border-radius: 90px;
+  transition: 0.2s;
+}
+input:checked + .button {
+  background-color: burlywood;
+}
+input:checked + .button::before {
+  transform: translateX(60px);
+}
+input {
+  display: none;
+}
+#hoso {
+  border-radius: 20px;
+  margin-top: 10px;
+  height: 620px;
+  margin-left: 30px;
+}
+.profile {
+  height: 650px;
+  width: 1480px;
+  background-image: url(./pexels-philippe-serrand-337910945-16038819.jpg);
+  background-size: cover;
+  border: 1px solid bisque;
+  border-radius: 30px;
+  margin: 10px auto;
+}
+.anhhoso {
+  margin-top: 20px;
+  background-position: center;
+  height: 200px;
+  width: 200px;
+  background-image: url(./z5555126346167_be25abad664fd3851395941cc26e3bb2.jpg);
+  background-size: cover;
+  border: 1px groove rgb(116, 116, 170);
+  border-radius: 20px;
+  box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.8);
+}
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+.bang {
+  width: 730px;
+  background-color: white;
+  margin: 80px auto;
+  border-radius: 30px;
+  box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.8);
+  text-align: center;
+}
+th,
+td {
+  padding: 20px;
+}
+tr {
+  background-color: #d7d6f8;
+  cursor: pointer;
+}
+table {
+  margin-left: 30px;
+}
+.datasensor {
+  color: red;
+  text-align: center;
+}
+.taobang {
+  width: 70%;
+  margin: 0px auto;
+}
+#searchTime .taobang .tenbang {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+#canvas {
+  width: 100%;
+}
+#hoso {
+  box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.8);
+  margin-top: 15px;
+}

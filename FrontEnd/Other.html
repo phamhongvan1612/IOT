@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./style1.css" />
+    <title>BTL</title>
+  </head>
+  <body>
+    <div class="header">
+      <div class="container">
+        <div class="body">
+          <h1>IOT</h1>
+          <nav class="hi">
+            <ul>
+              <li id="home">
+                <a href="./Home.html" target="_self">
+                  <i class="fa-solid fa-house"></i>
+                  Home
+                </a>
+              </li>
+              <li id="history">
+                <a href="./History.html" target="_self">
+                  <i class="fa-solid fa-clock-rotate-left"></i>
+                  History
+                </a>
+              </li>
+              <li id="otherhistory">
+                <a href="./History1.html" target="_self">
+                  <i class="fa-solid fa-clock-rotate-left"></i>
+                  History1
+                </a>
+              </li>
+              <li id="other">
+                <a href="./Other.html" target="_self">
+                  <i class="fa-solid fa-plane"></i>
+                  Other
+                </a>
+              </li>
+              <li id="otherhistory">
+                <a href="./History2.html" target="_self">
+                  <i class="fa-solid fa-clock-rotate-left"></i>
+                  History2
+                </a>
+              </li>
+              <li id="profile">
+                <a href="./Profile.html" target="_self">
+                  <i class="fa-regular fa-user"></i>
+                  Profile
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <div class="bodyother">
+      <div class="nut other">
+        <!-- LED3 -->
+        <div class="nut3 chung1 other1">
+          <div class="chu other2">
+            <i class="fa-regular fa-lightbulb fa-lg" style="color: purple"></i>
+            LED3
+          </div>
+          <div>
+            <span id="count-led3" class="count-text">Bật: 0 lần</span>
+          </div>
+          <div class="taonut taonut3">
+            <input
+              type="checkbox"
+              id="check3"
+              onchange="toggleLED('led3', this.checked)"
+            />
+            <label for="check3" class="button3 button"></label>
+          </div>
+        </div>
+        <!-- LED4 -->
+        <div class="nut4 chung1 other1">
+          <div class="chu other2">
+            <i class="fa-regular fa-lightbulb fa-lg" style="color: yellow"></i>
+            LED4
+          </div>
+          <div>
+            <span id="count-led4" class="count-text">Bật: 0 lần</span>
+          </div>
+          <div class="taonut taonut4">
+            <input
+              type="checkbox"
+              id="check4"
+              onchange="toggleLED('led4', this.checked)"
+            />
+            <label for="check4" class="button4 button"></label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      // Fetch LED counts and update UI
+      async function updateLedCount() {
+        try {
+          // Fetch count for LED3
+          const led3Response = await fetch(
+            "http://localhost:4000/api/countled3"
+          );
+          if (!led3Response.ok) {
+            throw new Error("Failed to fetch LED3 count");
+          }
+          const led3Data = await led3Response.json();
+          document.getElementById(
+            "count-led3"
+          ).textContent = `Bật: ${led3Data.count} lần`;
+
+          // Fetch count for LED4
+          const led4Response = await fetch(
+            "http://localhost:4000/api/countled4"
+          );
+          if (!led4Response.ok) {
+            throw new Error("Failed to fetch LED4 count");
+          }
+          const led4Data = await led4Response.json();
+          document.getElementById(
+            "count-led4"
+          ).textContent = `Bật: ${led4Data.count} lần`;
+        } catch (error) {
+          console.error("Error updating LED counts:", error);
+        }
+      }
+
+      // Fetch LED states and update button states
+      async function updateLedState() {
+        try {
+          const response = await fetch("http://localhost:4000/api/ledState");
+          if (!response.ok) {
+            throw new Error("Failed to fetch LED states");
+          }
+          const states = await response.json();
+
+          // Update button states based on database
+          document.getElementById("check3").checked = states.led3 || false;
+          document.getElementById("check4").checked = states.led4 || false;
+        } catch (error) {
+          console.error("Error updating LED states:", error);
+        }
+      }
+
+      // Toggle LED state via API
+      async function toggleLED(ledId, state) {
+        const ledState = state ? "on" : "off";
+        try {
+          const response = await fetch(
+            `http://localhost:5000/Led/${ledId}/${ledState}`
+          );
+          if (!response.ok) {
+            throw new Error(`Failed to toggle LED: ${response.status}`);
+          }
+          const result = await response.json();
+          console.log(result.message);
+
+          // Update counts after toggling LED
+          updateLedCount();
+        } catch (error) {
+          console.error("Error toggling LED:", error);
+        }
+      }
+
+      // Update counts and states on page load
+      document.addEventListener("DOMContentLoaded", () => {
+        setInterval(updateLedCount, 1000);
+        updateLedState();
+      });
+    </script>
+  </body>
+</html>

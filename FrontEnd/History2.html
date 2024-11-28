@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <title>BTL</title>
+  </head>
+  <body>
+    <div class="header">
+      <div class="container">
+        <div class="body">
+          <h1>IOT</h1>
+          <nav class="hi">
+            <ul>
+              <li id="home">
+                <a href="./Home.html" target="_self">
+                  <i class="fa-solid fa-house"></i>
+                  Home
+                </a>
+              </li>
+              <li id="history">
+                <a href="./History.html" target="_self">
+                  <i class="fa-solid fa-clock-rotate-left"></i>
+                  History
+                </a>
+              </li>
+              <li id="otherhistory">
+                <a href="./History1.html" target="_self">
+                  <i class="fa-solid fa-clock-rotate-left"></i>
+                  History1
+                </a>
+              </li>
+              <li id="other">
+                <a href="./Other.html" target="_self">
+                  <i class="fa-solid fa-plane"></i>
+                  Other
+                </a>
+              </li>
+              <li id="otherhistory">
+                <a href="./History2.html" target="_self">
+                  <i class="fa-solid fa-clock-rotate-left"></i>
+                  History2
+                </a>
+              </li>
+              <li id="profile">
+                <a href="./Profile.html" target="_self">
+                  <i class="fa-regular fa-user"></i>
+                  Profile
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <div class="bang bang2">
+      <div class="datasensor">
+        <h1>LED3,4</h1>
+      </div>
+      <div class="timkiem">
+        <div class="col-md-3">
+          <input
+            type="text"
+            id="searchID"
+            class="form-control"
+            placeholder="Search ID"
+          />
+        </div>
+        <div class="col-md-3">
+          <input
+            type="text"
+            id="searchDevice"
+            class="form-control"
+            placeholder="Search Device"
+          />
+        </div>
+        <div class="col-md-3">
+          <input
+            type="text"
+            id="searchAction"
+            class="form-control"
+            placeholder="Search Action"
+          />
+        </div>
+        <div class="col-md-3">
+          <input
+            type="text"
+            id="searchTime"
+            class="form-control"
+            placeholder="Search Time"
+          />
+        </div>
+      </div>
+
+      <table id="devicesTable" class="display">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Device</th>
+            <th>Action</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        // Initialize DataTable with custom settings for the Devices table
+        var table = $("#devicesTable").DataTable({
+          paging: true,
+          searching: true,
+          ordering: true,
+          info: true,
+          pageLength: 5,
+          lengthMenu: [5, 10, 15, 20],
+          language: {
+            search: "Filter records:",
+            lengthMenu: "Display _MENU_ records per page",
+          },
+        });
+
+        // Load data from API
+        loadDeviceData();
+
+        // Function to load device data from the API and update the DataTable
+        function loadDeviceData() {
+          $.getJSON("http://localhost:4000/api/Data2", function (data) {
+            table.clear(); // Clear any existing data in the table
+            $.each(data, function (index, item) {
+              const localTime = new Date(item.Time).toLocaleString("en-GB", {
+                timeZone: "Asia/Ho_Chi_Minh",
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+              });
+              table.row.add([item.ID, item.Device, item.Action, localTime]);
+            });
+            table.draw(); // Redraw the table with the new data
+          });
+        }
+
+        // Individual column searching
+        $("#searchID").on("keyup", function () {
+          table.columns(0).search(this.value).draw();
+        });
+
+        $("#searchDevice").on("keyup", function () {
+          table.columns(1).search(this.value).draw();
+        });
+
+        $("#searchAction").on("keyup", function () {
+          table.columns(2).search(this.value).draw();
+        });
+
+        $("#searchTime").on("keyup", function () {
+          table.columns(3).search(this.value).draw();
+        });
+      });
+    </script>
+  </body>
+</html>

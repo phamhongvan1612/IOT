@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <title>BTL</title>
+  </head>
+  <body>
+    <div class="header">
+      <div class="container">
+        <div class="body">
+          <h1>IOT</h1>
+          <nav class="hi">
+            <ul>
+              <li id="home">
+                <a href="./Home.html" target="_self">
+                  <i class="fa-solid fa-house"></i>
+                  Home
+                </a>
+              </li>
+              <li id="history">
+                <a href="./History.html" target="_self">
+                  <i class="fa-solid fa-clock-rotate-left"></i>
+                  History
+                </a>
+              </li>
+              <li id="otherhistory">
+                <a href="./History1.html" target="_self">
+                  <i class="fa-solid fa-clock-rotate-left"></i>
+                  History1
+                </a>
+              </li>
+              <li id="other">
+                <a href="./Other.html" target="_self">
+                  <i class="fa-solid fa-plane"></i>
+                  Other
+                </a>
+              </li>
+              <li id="otherhistory">
+                <a href="./History2.html" target="_self">
+                  <i class="fa-solid fa-clock-rotate-left"></i>
+                  History2
+                </a>
+              </li>
+              <li id="profile">
+                <a href="./Profile.html" target="_self">
+                  <i class="fa-regular fa-user"></i>
+                  Profile
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <div class="body2">
+      <div class="khoi">
+        <div class="body1">
+          <div class="thanhphan">
+            <!-- Div hiển thị dữ liệu -->
+            <div class="tp1 chung">
+              <i
+                class="fa-solid fa-temperature-high fa-lg"
+                style="color: #113b83"
+              ></i>
+              Nhiệt độ
+              <h1></h1>
+            </div>
+            <div class="tp2 chung">
+              <i class="fa-solid fa-droplet fa-lg" style="color: #74c0fc"></i>
+              Độ ẩm
+              <h1></h1>
+            </div>
+            <div class="tp3 chung">
+              <i class="fa-regular fa-sun fa-lg" style="color: #ffd43b"></i>
+              Cường độ sáng
+              <h1></h1>
+            </div>
+          </div>
+          <script>
+            async function fetchSensorData() {
+              try {
+                const response = await fetch("http://localhost:3000/api/data");
+                const data = await response.json();
+
+                if (data.length > 0) {
+                  // Use the latest data entry for display
+                  const Data = data[0];
+
+                  // Update HTML elements with the fetched data
+                  document.querySelector(
+                    ".tp1 h1"
+                  ).textContent = `${Data.Temperature}°C`;
+                  document.querySelector(
+                    ".tp2 h1"
+                  ).textContent = `${Data.Humidity}%`;
+                  document.querySelector(
+                    ".tp3 h1"
+                  ).textContent = `${Data.Light} Lux`;
+                } else {
+                  console.log("No data available");
+                }
+              } catch (error) {
+                console.error("Error fetching data:", error);
+              }
+            }
+
+            // Fetch data when the page loads and set an interval to update periodically
+            window.onload = () => {
+              fetchSensorData();
+              setInterval(fetchSensorData, 1000); // Refresh data every 1 seconds
+            };
+          </script>
+        </div>
+        <div class="table1">
+          <div class="taobang">
+            <div class="tenbang">Chart</div>
+            <canvas id="myChart"></canvas>
+            <script src="./Home.js"></script>
+          </div>
+        </div>
+        <div class="nut">
+          <div class="nut1 chung1">
+            <div class="chu">
+              <i class="fa-regular fa-lightbulb fa-lg" style="color: red"></i>
+              LED1
+            </div>
+            <div class="taonut1 taonut">
+              <input
+                type="checkbox"
+                id="check1"
+                onchange="toggleLED('led1', this.checked)"
+              />
+              <label for="check1" class="button1 button"></label>
+            </div>
+          </div>
+          <div class="nut2 chung1">
+            <div class="chu">
+              <i class="fa-regular fa-lightbulb fa-lg" style="color: green"></i>
+              LED2
+            </div>
+            <div class="taonut2 taonut">
+              <input
+                type="checkbox"
+                id="check2"
+                onchange="toggleLED('led2', this.checked)"
+              />
+              <label for="check2" class="button2 button"></label>
+            </div>
+          </div>
+        </div>
+        <script>
+          // Fetch LED states and update button states
+          async function updateLedState() {
+            try {
+              const response = await fetch(
+                "http://localhost:3000/api/ledState"
+              );
+              if (!response.ok) {
+                throw new Error("Failed to fetch LED states");
+              }
+              const states = await response.json();
+
+              // Update button states based on database
+              document.getElementById("check1").checked = states.led1 || false;
+              document.getElementById("check2").checked = states.led2 || false;
+            } catch (error) {
+              console.error("Error updating LED states:", error);
+            }
+          }
+
+          function toggleLED(ledId, state) {
+            // Determine the LED state as 'on' or 'off'
+            const ledState = state ? "on" : "off";
+
+            // Make an API request to the Node.js server to control the LED
+            fetch(`http://localhost:8000/led/${ledId}/${ledState}`)
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error("Failed to toggle LED");
+                }
+                return response.json();
+              })
+              .then((data) => console.log(data.message))
+              .catch((error) => console.error("Error:", error));
+          }
+          // Update counts and states on page load
+          document.addEventListener("DOMContentLoaded", () => {
+            updateLedState();
+          });
+        </script>
+      </div>
+    </div>
+  </body>
+</html>
